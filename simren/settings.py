@@ -22,9 +22,7 @@ CLOUDINARY_STORAGE = {
     'API_KEY': os.getenv("API_KEY"), 
     'API_SECRET': os.getenv("API_SECRET"),
 }
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 cloudinary.config(
     cloud_name=os.getenv("CLOUD_NAME"),
@@ -60,7 +58,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
     'core',
