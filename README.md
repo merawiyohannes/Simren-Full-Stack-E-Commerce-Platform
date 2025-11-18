@@ -6,7 +6,28 @@ A production-ready mini Amazon-like shopping platform with complete payment proc
 [View Live Site](https://simren.onrender.com)
 
 ## 📸 Screenshots
-*(Add screenshots of your dashboard, product pages, cart, etc.)*
+
+### 🏠 Homepage
+![Homepage](./screenshots/simren-home-page.png)
+
+### 🛒 Shopping Cart
+![Cart](./screenshots/simren-cart-mobile-view.png)
+
+### 💳 Payment System
+![Payment](./screenshots/simren-chapapayment-page.png)
+
+### 📱 Responsive Dashboard
+![Dashboard](./screenshots/simren-responsive-dashboard.png)
+
+### 🧾 Digital Receipts
+![Receipt](./screenshots/simren-payment-reciept.png)
+
+### 🔐 User Authentication
+![Login](./screenshots/simren-login.png)
+![Signup](./screenshots/simren-signup.png)
+
+### 🎯 Product Management
+![Products](./screenshots/simren-item-detail-page.png)
 
 ## 🌟 Features
 
