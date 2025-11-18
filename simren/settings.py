@@ -22,7 +22,7 @@ CLOUDINARY_STORAGE = {
     'API_KEY': os.getenv("API_KEY"), 
     'API_SECRET': os.getenv("API_SECRET"),
 }
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
@@ -105,7 +105,6 @@ WSGI_APPLICATION = 'simren.wsgi.application'
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static/']
 STATIC_ROOT = BASE_DIR / 'staticfiles/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
