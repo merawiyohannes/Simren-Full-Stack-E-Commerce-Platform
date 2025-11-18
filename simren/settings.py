@@ -1,13 +1,12 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-import dj_database_url 
+import cloudinary
 
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Secrets
 SECRET_KEY = os.getenv('SECRET_KEY')
 CHAPA_SECRET_KEY = os.getenv('CHAPA_SECRET_KEY')
 
@@ -18,18 +17,19 @@ CSRF_TRUSTED_ORIGINS = [
     'https://simren.onrender.com',
 ]
 
-# Re-enable these in settings.py
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv("CLOUD_NAME"),
     'API_KEY': os.getenv("API_KEY"), 
     'API_SECRET': os.getenv("API_SECRET"),
 }
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-# Database
+cloudinary.config(
+    cloud_name=os.getenv("CLOUD_NAME"),
+    api_key=os.getenv("API_KEY"),
+    api_secret=os.getenv("API_SECRET")
+)
 
 if os.getenv('USE_SUPABASE', 'False') == 'True':
-    # Production - Supabase PostgreSQL with Session Pooler
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -43,32 +43,29 @@ if os.getenv('USE_SUPABASE', 'False') == 'True':
             },
         }
     }
-    print("✅ Using Supabase PostgreSQL with Session Pooler")
 else:
-    # Development - SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-    print("✅ Using local SQLite database")
 
 INSTALLED_APPS = [
-     'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'core',
     'item',
     'cart',
     'authentication',
     'utility',
     'dashboard',
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +111,3 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = '/login/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://simren-shopping.onrender.com',
-]

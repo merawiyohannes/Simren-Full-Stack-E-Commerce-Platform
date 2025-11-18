@@ -17,8 +17,17 @@ def edit_view(request, id):
     if request.method == "POST":
         form = EditForm(request.POST, request.FILES, instance=item)
         if form.is_valid():
-            form.save()
-            return redirect('detail_view', item.id)
+            try:
+                # SIMPLE FIX: Reset file pointers
+                if request.FILES:
+                    for file in request.FILES.values():
+                        if hasattr(file, 'seek'):
+                            file.seek(0)
+                
+                form.save()
+                return redirect('detail_view', item.id)
+            except Exception as e:
+                print(f"❌ ERROR: {str(e)}")
         else:
             print(form.errors)
     else:
@@ -29,13 +38,23 @@ def add_item_view(request):
     if request.method == "POST":
         form = AddItemForm(request.POST, request.FILES)
         if form.is_valid():
-            new = form.save(commit=False)
-            new.created_by = request.user
-            new.save()
-            return redirect('home_view')
+            try:
+                # SIMPLE FIX: Reset all file pointers before saving
+                if request.FILES:
+                    for file in request.FILES.values():
+                        if hasattr(file, 'seek'):
+                            file.seek(0)  # ← THIS IS THE MAGIC LINE
+                
+                new = form.save(commit=False)
+                new.created_by = request.user
+                new.save()
+                return redirect('home_view')
+                
+            except Exception as e:
+                print(f"❌ ERROR: {str(e)}")
+                return render(request, "utility/add.html", {"form": form})
         else:
-            print(form.errors)
-        
+            print("❌ Form errors:", form.errors)
     else:
         form = AddItemForm()   
-    return render(request, "utility/add.html", {"form":form})
+    return render(request, "utility/add.html", {"form": form})
