@@ -11,5 +11,6 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('', include('utility.urls')),
     path('', include('dashboard.urls')),
+    path('', include('pwa.urls'))
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -21,6 +21,7 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv("CLOUD_NAME"),
     'API_KEY': os.getenv("API_KEY"), 
     'API_SECRET': os.getenv("API_SECRET"),
+    'SECURE': True,
 }
 
 
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'core',
     'item',
+    'pwa',
     'cart',
     'authentication',
     'utility',
@@ -111,3 +113,43 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = '/login/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Progressive Web App Settings for Simren
+PWA_APP_NAME = 'Simren Shopping'
+PWA_APP_SHORT_NAME = 'Simren'
+PWA_APP_DESCRIPTION = 'Full-stack e-commerce platform with secure payments'
+PWA_APP_THEME_COLOR = '#3B82F6'  # Tailwind blue
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'portrait'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/images/android-chrome-192x192.png',
+        'sizes': '192x192',
+        'type': 'image/png'
+    },
+    {
+        'src': '/static/images/android-chrome-512x512.png', 
+        'sizes': '512x512',
+        'type': 'image/png'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': '/static/images/apple-touch-icon.png',
+        'sizes': '180x180',
+        'type': 'image/png'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': '/static/images/splash-640x1136.png',
+        'sizes': '640x1136',
+        'media': '(device-width: 320px) and (device-height: 568px)'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-US'

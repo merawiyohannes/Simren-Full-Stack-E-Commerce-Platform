@@ -136,5 +136,3 @@ MIT License - feel free to use this project as a template for your own e-commerc
 Built by Merawi Yohannes a developer who's ready for opportunities!
 
 - **Deployment**: Render
-
-## 🏗️ Project Structu
